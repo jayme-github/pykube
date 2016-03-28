@@ -20,8 +20,14 @@ class BaseQuery(object):
         self.namespace = namespace
         self.selector = everything
 
-    def all(self):
-        return self._clone()
+    def all(self, namespace=None):
+        """
+        Return a BaseQuery instance without selector.
+
+        :Parameters:
+            - `namespace`: Optional namespace (string or pykube.all)
+        """
+        return self.filter(namespace=namespace, selector=None)
 
     def filter(self, namespace=None, selector=None):
         clone = self._clone()
